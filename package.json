@@ -1,0 +1,36 @@
+{
+	"name": "jQuery-auto-hide-cursor-plugin",
+	"version": "0.0.1",
+	"description": "This plugin is used to automatically hide the mouse cursor when the mouse remains stationary for a period of time.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lzwme/autohidecursor.git"
+	},
+	"bugs": {
+		"url": "https://github.com/lzwme/autohidecursor/issues"
+	},
+	"main": "jquery-auto-hide-cursor.js",
+	"keywords": [
+		"jquery",
+		"mouse",
+		"cursor"
+	],
+	"author": "renxia <lzwy0820@qq.com>",
+	"license": "MIT",
+	"homepage": "https://lzw.me/pages/demo/autohidecursor",
+	"engines": {
+		"node": ">= 0.8.0"
+	},
+	"scripts": {
+		"test": "grunt qunit",
+		"build": "grunt production"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.1",
+		"grunt-contrib-watch": "~0.5.3",
+		"grunt-contrib-uglify": "~0.2.2",
+		"grunt-contrib-concat": "~0.3.0",
+		"grunt-contrib-jshint": "~0.6.2",
+		"grunt-contrib-copy": "~0.7.0"
+	}
+}
