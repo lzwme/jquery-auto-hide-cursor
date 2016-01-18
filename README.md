@@ -22,14 +22,14 @@ This plugin is used to automatically hide the mouse cursor when the mouse remain
 具体使用请参考参数配置说明及 demo 示例页面源码([Demo](https://lzw.me/pages/demo/autohidecursor))
 
 ####方法调用
-1. 启用
+启用
 
 ```javscript
 $('#test').autoHideMouseCursor(2000); //应用于某个元素上
 $('html').autoHideMouseCursor(2000);  //应用于整个页面
 ```
 
-2. 销毁
+销毁
 
 ```javscript
 $('#test').data('autoHideMouseCursor').destory();
@@ -42,7 +42,7 @@ timeout: 2000 //鼠标静止多久后消失，单位为毫秒。最小值不能�
 
 ## 使用示例
 
-请参考 index.html 源码实例。
+请参考 index.html 文件源码示例。
 
 ## 二次开发
 
