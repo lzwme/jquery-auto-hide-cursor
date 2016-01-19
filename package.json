@@ -22,8 +22,7 @@
 		"node": ">= 0.8.0"
 	},
 	"scripts": {
-		"test": "grunt qunit",
-		"build": "grunt production"
+		"test": "grunt jshint"
 	},
 	"devDependencies": {
 		"grunt": "~0.4.1",

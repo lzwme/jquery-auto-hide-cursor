@@ -3,72 +3,103 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Bootstrap 搜索建议插件</title>
+		<title>jQuery自动隐藏鼠标指针插件 | jQuery-auto-hide-mouse-cursor-plugin</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="description" content="这是一个用于自动隐藏鼠标指针的 jQuery 插件。在设定的时间内鼠标一直保持不动，则会在应用对象上隐藏鼠标指针">
 		<meta name="Keywords" content="jQuery,mouse,cursor, auto hide">
 		<meta name="author" content="lizhiwen@meizu.com">
 		<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 		<style>
-		body{
-			max-width: 1000px;
-			margin: auto;
-		}
-		#test{
-			max-width: 600px;
-			height: 300px;
-			background: #f00;
-			color: #fff;
-			padding: 20px
-		}
+			body {
+				max-width: 1000px;
+				margin: auto;
+			}
+
+			#test {
+				max-width: 600px;
+				height: 300px;
+				background: #03a9f4;
+				color: #fff;
+				padding: 20px
+			}
+			#test .test-text{
+				display: none;
+			}
 		</style>
 	</head>
 
 	<body>
 		<div class="container">
+			<div class="alert alert-success fade out"></div>
+
 			<h2>jQuery-auto-hide-mouse-cursor-plugin</h2>
 			<p>这是一个用于自动隐藏鼠标指针的 jQuery 插件。在设定的时间内鼠标一直保持不动，则会在应用对象上隐藏鼠标指针。</p>
-			<button id="initTest" class="btn btn-info">Init Test</button>
-			<button id="destoryTest" class="btn btn-info">Destory Test</button>
+			<div class="row">
+				<div class="col-md-12">
+					<button id="initTest" class="btn btn-info">Init Test</button>
+					<button id="destoryTest" class="btn btn-danger">Destory Test</button>
 
-			<button id="initHtml" class="btn btn-info">Init Html</button>
-			<button id="destoryHtml" class="btn btn-info">Destory Html</button>
+					<button id="initHtml" class="btn btn-info">Init Html</button>
+					<button id="destoryHtml" class="btn btn-danger">Destory Html</button>
+				</div>
+				<br><br>
+			</div>
 
 			<h3>启用：</h3>
 			<pre>$('#test').autoHideMouseCursor(2000); //应用于某个元素上
 $('html').autoHideMouseCursor(2000);  //应用于整个页面</pre>
-			<div id="test">#test: 鼠标放于当前位置，静止 2000ms 后则自动隐藏。</div>
+			<div id="test"><p class="test-text">#test: 鼠标放于当前位置，静止 2000ms 后则自动隐藏。</p></div>
 			<h3>销毁</h3>
 			<pre>$('#test').data('autoHideMouseCursor').destory();
 $('html').data('autoHideMouseCursor').destory();</pre>
 		</div>
 
+		<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="jquery-auto-hide-cursor.js" type="text/javascript"></script>
 
-	<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="jquery-auto-hide-cursor.js" type="text/javascript"></script>
+		<script>
+			var tipAlertId;
+			function tipAlert(msg) {
+				var $alert = $('.alert');
+				$alert.text(msg).removeClass('out').addClass('in');
 
-	<script>
-		$('#initTest').on('click', function () {
-			$('#test').autoHideMouseCursor(2000);
-		});
-
-		$('#destoryTest').on('click', function () {
-			if ($('#test').data('autoHideMouseCursor')) {
-				$('#test').data('autoHideMouseCursor').destory();
+				clearTimeout(tipAlertId);
+				tipAlertId = setTimeout(function(){
+					$alert.text('').removeClass('in').addClass('out');
+				}, 5000);
 			}
-		});
 
-		$('#initHtml').on('click', function () {
-			$('html').autoHideMouseCursor(3000);
-		});
+			//#test div
+			$('#initTest').on('click', function() {
+				$('#test').autoHideMouseCursor(2000);
+				$('.test-text').show();
+				tipAlert('test 容器已启用鼠标自动隐藏，超时时间 2000ms');
+			}).trigger('click');
+			$('#destoryTest').on('click', function() {
+				if ($('#test').data('autoHideMouseCursor')) {
+					$('#test').data('autoHideMouseCursor').destory();
+					tipAlert('test 容器鼠标自动隐藏行为已注销');
+					$('.test-text').hide();
+				} else {
+					tipAlert('test 容器未注册鼠标自动隐藏行为');
+				}
+			});
 
-		$('#destoryHtml').on('click', function () {
-			if ($('html').data('autoHideMouseCursor')) {
-				$('html').data('autoHideMouseCursor').destory();
-			}
-		});
-	</script>
+			//当前整个页面
+			$('#initHtml').on('click', function() {
+				$('html').autoHideMouseCursor(3000);
+				tipAlert('当前页面已启用鼠标自动隐藏，超时时间 3000ms');
+			});
+			$('#destoryHtml').on('click', function() {
+				if ($('html').data('autoHideMouseCursor')) {
+					$('html').data('autoHideMouseCursor').destory();
+					tipAlert('当前页面鼠标自动隐藏行为已注销');
+				} else {
+					tipAlert('当前页面未注册鼠标自动隐藏行为');
+				}
+			});
+		</script>
 
 	</body>
 

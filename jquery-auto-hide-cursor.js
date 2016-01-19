@@ -2,13 +2,34 @@
  * jQuery-auto-hide-cursor-plugin
  * This plugin is used to automatically hide the mouse pointer when the mouse remains stationary for a period of time.
  * Author: renxia <lzwy0820#qq.com>
- * Github: https://github.com/lzwme/autohidecursor
+ * Github: https://github.com/lzwme/autohidecursor.git
  * Date  : 2016-01-18
- * Update: 2016-01-18
+ * Update: 2016-01-19
  */
 (function($) {
     //插入 head 中的样式
     var style = '<style id="jqAutohideCursor">.jq_autohide_cursor,.jq_autohide_cursor *{cursor: none !important}</style>';
+
+    /**
+     * 当鼠标移动时监听触发
+     * @param {Object} e
+     */
+    function mouseMove(scope) {
+        clearTimeout(scope.delayId);
+        clearTimeout(scope.timeoutId);
+        scope.delayId = setTimeout(function() {
+            if (scope.$el.hasClass('jq_autohide_cursor')) {
+                scope.$el.removeClass('jq_autohide_cursor');
+            }
+
+            clearTimeout(scope.timeoutId);
+            scope.timeoutId = setTimeout(function(){
+                if (! scope.$el.hasClass('jq_autohide_cursor')) {
+                    scope.$el.addClass('jq_autohide_cursor');
+                }
+            }, scope.options.timeout);
+        }, 100);
+    }
 
     /**
      * 构造函数
@@ -25,45 +46,30 @@
     }
 
     JAHC.prototype = {
-        delayId: null, //mousemove 执行最短间隔定时ID
-        timeoutId: null, //mousemove 定时ID
         /**
          * 初始化
          * @param {Object} options
          */
         init: function(options) {
-            var self = this;
-            this.options = options;
+            var scope = this;
 
+            //样式 style 加入 head
             if (! $('style#jqAutohideCursor').length) {
                 $('head:eq(0)').append(style);
             }
 
-            $(window).on('mousemove', {self: this}, this.onMouseMove);
+            //初始化实例属性
+            this.options = options;
+            this.delayId = null;                //mousemove 执行最短间隔定时ID
+            this.timeoutId = null;              //mousemove 定时ID
+            this.onMouseMove = function (e) {   //mousemove 监听事件，每个实例独立
+                //var scope = e.data.scope;
+                mouseMove(scope);
+            };
+
+            $(window).on('mousemove', {scope: this}, this.onMouseMove);
 
             return this;
-        },
-        /**
-         * 当鼠标移动时监听触发
-         * @param {Object} e
-         */
-        onMouseMove: function(e) {
-            var scope = e.data.self;
-
-            clearTimeout(scope.delayId);
-            clearTimeout(scope.timeoutId);
-            scope.delayId = setTimeout(function() {
-                if (scope.$el.hasClass('jq_autohide_cursor')) {
-                    scope.$el.removeClass('jq_autohide_cursor');
-                }
-
-                clearTimeout(scope.timeoutId);
-                scope.timeoutId = setTimeout(function(){
-                    if (! scope.$el.hasClass('jq_autohide_cursor')) {
-                        scope.$el.addClass('jq_autohide_cursor');
-                    }
-                }, scope.options.timeout);
-            }, 100);
         },
         /**
          * 销毁
@@ -94,18 +100,16 @@
 
         options = $.extend({
             timeout: 3000, //鼠标停留多少 ms 不动后自动消失
-            isForce: true  //是否强制隐藏。为 true 则当子元素设置了 cursor 也会被覆盖
+            isForce: true  //是否强制隐藏。为 true 则当子元素设置了 cursor 也会被覆盖. todo
         }, options);
         options.timeout = options.timeout < 1000 ? 1000 : options.timeout;
 
-        var jamc = new JAHC($el, options);
+        var jahc = new JAHC($el, options);
 
         //存储 destory 方法
-        $el.data('autoHideMouseCursor', {
-            destory: $.proxy(jamc.destory, jamc),
+        return $el.data('autoHideMouseCursor', {
+            destory: $.proxy(jahc.destory, jahc),
             options: options
         });
-
-        return $el;
     };
 })(window.jQuery);
