@@ -4,10 +4,10 @@
 	"description": "This plugin is used to automatically hide the mouse cursor when the mouse remains stationary for a period of time.",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/lzwme/autohidecursor.git"
+		"url": "https://github.com/lzwme/jquery-auto-hide-cursor.git"
 	},
 	"bugs": {
-		"url": "https://github.com/lzwme/autohidecursor/issues"
+		"url": "https://github.com/lzwme/jquery-auto-hide-cursor/issues"
 	},
 	"main": "jquery-auto-hide-cursor.js",
 	"keywords": [

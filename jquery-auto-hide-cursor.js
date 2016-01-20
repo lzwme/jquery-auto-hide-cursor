@@ -2,7 +2,7 @@
  * jQuery-auto-hide-cursor-plugin
  * This plugin is used to automatically hide the mouse pointer when the mouse remains stationary for a period of time.
  * Author: renxia <lzwy0820#qq.com>
- * Github: https://github.com/lzwme/autohidecursor.git
+ * Github: https://github.com/lzwme/jquery-auto-hide-cursor.git
  * Date  : 2016-01-18
  * Update: 2016-01-19
  */
