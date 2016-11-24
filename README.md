@@ -5,13 +5,17 @@ jQuery Auto Hide Mouse Cursor Plugin [![Built with Grunt](https://cdn.gruntjs.co
 
 [Demo|示例](https://lzw.me/pages/demo/autohidecursor)
 
-This plugin is used to automatically hide the mouse cursor when the mouse remains stationary for a period of time.
+这是一个用于自动隐藏鼠标指针的 jQuery 插件。在设定的时间内鼠标一直保持不动，则会在应用的 DOM 对象上隐藏鼠标指针。
 
-这是一个用于自动隐藏鼠标指针的 jQuery 插件。在设定的时间内鼠标一直保持不动，则会在应用对象上隐藏鼠标指针。
+**用处：**
+
+在用于全屏展示的大屏幕页面中，如果鼠标不自动隐藏，那么就会有一个鼠标箭头一直停留在页面上。
+
+解决办法一种是设置系统鼠标的自动隐藏，另外一种方法就是在页面中控制自动隐藏了。本插件即为了简单满足该功能诉求而实现。
 
 ## 快速上手
 
-1. 引入 jquery.min.js
+1. 引入 `jquery.min.js`
 2. 引入插件js: `jquery-auto-hide-cursor.min.js`
 3. 初始化插件
 
@@ -25,8 +29,8 @@ This plugin is used to automatically hide the mouse cursor when the mouse remain
 启用
 
 ```javscript
-$('#test').autoHideMouseCursor(2000); //应用于某个元素上
-$('html').autoHideMouseCursor(2000);  //应用于整个页面
+$('#test').autoHideMouseCursor(2000); // 应用于某个元素上
+$('html').autoHideMouseCursor(2000);  // 应用于整个页面
 ```
 
 销毁
@@ -38,11 +42,11 @@ $('html').data('autoHideMouseCursor').destory();
 
 ## 配置参数
 
-timeout: 2000 //鼠标静止多久后消失，单位为毫秒。最小值不能低于 100，最大值不能超过  setTimeout 定时的最大延时上限。
+- `timeout: 2000` //鼠标静止多久后消失，单位为毫秒。最小值不能低于 100，最大值不能超过  setTimeout 定时的最大延时上限。
 
 ## 使用示例
 
-请参考 index.html 文件源码示例。
+请参考 [index.html](https://github.com/lzwme/jquery-auto-hide-cursor/blob/master/index.html) 文件源码示例。
 
 ## 二次开发
 
