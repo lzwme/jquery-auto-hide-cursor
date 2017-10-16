@@ -1,6 +1,6 @@
-[![Code Climate](https://lzw.me/images/logo.png)](http://lzw.me)
+[![Code Climate](https://lzw.me/images/logo.png)](https://lzw.me)
 
-jQuery Auto Hide Mouse Cursor Plugin [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+jQuery Auto Hide Mouse Cursor Plugin [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](https://gruntjs.com/)
 ========
 
 [Demo|示例](https://lzw.me/pages/demo/autohidecursor)
@@ -25,15 +25,15 @@ jQuery Auto Hide Mouse Cursor Plugin [![Built with Grunt](https://cdn.gruntjs.co
 
 具体使用请参考参数配置说明及 demo 示例页面源码([Demo](https://lzw.me/pages/demo/autohidecursor))
 
-####方法调用
-启用
+### 方法调用
+**启用**
 
 ```javscript
 $('#test').autoHideMouseCursor(2000); // 应用于某个元素上
 $('html').autoHideMouseCursor(2000);  // 应用于整个页面
 ```
 
-销毁
+**销毁**
 
 ```javscript
 $('#test').data('autoHideMouseCursor').destory();
